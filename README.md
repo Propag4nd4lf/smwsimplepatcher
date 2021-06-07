@@ -17,7 +17,7 @@ __4a.__ Select the hack and press "Download And Patch ROM".
 __4b.__ You can alternatively select multiple hacks to download and patch them all at once if you need to.
 
 
-## SCREENSHOT
+## Screenshot
 
 ![](https://i.imgur.com/ZZNoXKC.gif)
 
