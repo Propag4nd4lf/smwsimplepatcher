@@ -15,7 +15,7 @@ Get SMW Simple Patcher by downloading [the latest release](https://github.com/Pr
 2. - Download the essential files.
 3. - Set an output folder.
 4a - Select the hack and press "Download And Patch ROM".
-4b - You can alternatively select multiple hacks to download and patch them all at once if you need to.
+4b - You can alternatively select multiple hacks to download/patch them all at once if you need to.
 ```
 
 
