@@ -18,9 +18,6 @@ Get SMW Simple Patcher by downloading [the latest release](https://github.com/Pr
 4b - You can alternatively select multiple hacks to download/patch them all at once if you need to.
 ```
 
-
-## Screenshot
-
 ![](https://i.imgur.com/ZZNoXKC.gif)
 
 
