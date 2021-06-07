@@ -10,17 +10,20 @@ Get SMW Simple Patcher by downloading [the latest release](https://github.com/Pr
 
 ## How do I use the program?
 
-__1.__ Update the database.
-__2.__ Download the essential files.
-__3.__ Set an output folder.
-__4a.__ Select the hack and press "Download And Patch ROM".
-__4b.__ You can alternatively select multiple hacks to download and patch them all at once if you need to.
+```
+1  - Update the database.
+2. - Download the essential files.
+3. - Set an output folder.
+4a - Select the hack and press "Download And Patch ROM".
+4b - You can alternatively select multiple hacks to download and patch them all at once if you need to.
+```
 
 
 ## Screenshot
 
 ![](https://i.imgur.com/ZZNoXKC.gif)
 
-### Licence
+
+## Licence
 
 Do whatever you want with it. I was only making it to learn the Qt framework.
