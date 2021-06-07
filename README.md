@@ -24,6 +24,18 @@ Get SMW Simple Patcher by downloading [the latest release](https://github.com/Pr
 ![](https://i.imgur.com/ZZNoXKC.gif)
 
 
+## Python
+
+If you are planning to run it from the source, you'll need to install a couple of packages.
+```
+pip install beautifulsoup4
+pip install py7zr
+pip install python-bps-continued
+pip install PyQt5
+pip install requests
+```
+Only been tested on Python version 3.8.10.
+
 ## Licence
 
 Do whatever you want with it. I was only making it to learn the Qt framework.
