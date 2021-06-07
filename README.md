@@ -33,6 +33,14 @@ pip install requests
 ```
 Only been tested on Python version 3.8.10.
 
+
+## Notes
+
+- The Original Rom is _not_ located on Github or any of my servers (__!__). The software simply just downloads it from an public website.
+- If an hack no longer exists (this could happen if it was put out as an demo, and then removed), the download will fail. To remove it from the list, select the hack and press the button with the arrows circling around.
+- If an hack has an zip file included in the original zip file, the patch will fail. You will need to manually patch that one.
+
+
 ## Licence
 
 Do whatever you want with it. I was only making it to learn the Qt framework.
