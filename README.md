@@ -1,6 +1,6 @@
-# SWM Simple Patcher
+# SMW Simple Patcher
 
-With this tool you will be able to download and patch SWM roms really easy and fast.
+With this tool you will be able to download and patch Super Mario World roms really easy and fast.
 
 
 ## How to Install?
