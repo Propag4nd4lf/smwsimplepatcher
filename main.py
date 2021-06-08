@@ -31,10 +31,13 @@ import webbrowser
 import urllib
 import subprocess
 
+version = '1.0.1'
 
 ###################
 ### MAIN WINDOW ###
 ###################
+
+
 class MainWindow(QtWidgets.QMainWindow):
     snesRomInfoUrl = 'https://www.smwcentral.net/?p=section&a=details&id='
     githubLink = 'https://github.com/Propag4nd4lf/smwsimplepatcher'
@@ -54,9 +57,13 @@ class MainWindow(QtWidgets.QMainWindow):
     ### INITIALIZE ###
     ##################
     def __init__(self):
+        global version
         super(MainWindow, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+
+        self.setWindowTitle(
+            'SMW: Simple Patcher - v{}'.format(version))
 
         self.currentDir = self.getCurrentDir()
         icon = QtGui.QIcon(':/img/icon.png')
@@ -474,7 +481,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def updateConsole(self, text):
         if text == 'reset':
-            self.ui.label.setText('SWM: Simple Patcher - by Propagandalf')
+            self.ui.label.setText('SMW: Simple Patcher - by Propagandalf')
             return
         self.ui.label.setText(text)
 

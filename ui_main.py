@@ -1049,7 +1049,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate(
-            "MainWindow", "SWM: Simple Patcher - v1.0"))
+            "MainWindow", "SMW: Simple Patcher"))
         self.btnUpdateDatabase.setText(
             _translate("MainWindow", "Update Database"))
         self.btnDownloadEssentialsFiles.setText(
