@@ -1,0 +1,3 @@
+*.sfc
+data/
+__pycache__

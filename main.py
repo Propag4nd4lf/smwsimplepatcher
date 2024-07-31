@@ -1271,21 +1271,17 @@ class WThreadUpdateDatabase(QtCore.QThread):
         print('Trying to get last page and amount waiting... Please wait')
         try:
             htmlPage = 'https://www.smwcentral.net/?p=section&s=smwhacks'
-            source = requests.get(htmlPage).text
+            source = requests.get(htmlPage).text            
             soup = bs.BeautifulSoup(source, 'html.parser')
-            tablerow = soup.find('td', id="menu")
+            tablerow = soup.find('div', class_="actions")
             # GET AMOUNT WAITING
-            result = re.search('Show Waiting Files (.*)</a>', str(tablerow))
+            result = re.search('waiting (.*)</a>', str(tablerow))
             self.amountWaiting = int(result.group(1)[1:-1])
             print('Awaiting romhacks:', self.amountWaiting)
             # GET LAST PAGE
-            aTags = tablerow.findAll('a')
-            sort = []
-            for a in aTags:
-                if 'Go to page ' in str(a):
-                    sort.append(str(a))
-            a = sort[int(len(sort)-1)]
-            result = re.search('">(.*)</a>', a)
+            pagesHeader = soup.find('ul', class_="page-list")
+            liTags = pagesHeader.findAll('li')
+            result = re.search('">(.*)</a>', str(liTags[-1]))
             self.lastPage = result.group(1)
             print('Amount of pages:', self.lastPage)
             return True
@@ -1318,15 +1314,14 @@ class WThreadUpdateDatabase(QtCore.QThread):
                 try:
                     # INSERT PAGE HERE LATER INSIDE LOOP
                     source = requests.get(self.getHtmlPage(page)).text
-                    result = source.split('<div id="list_content">')[
-                        1].split('</table>')[0]
-                    result = result[23:]+'</table>'
-                    final = result.replace('</div>', '')
-                    soup = bs.BeautifulSoup(final, 'html.parser')
+                    result = source.split('<div class="content has-table">')[
+                        1]
+                    result = result.split('<tbody>')[1].split('</tbody>')[0]                    
+                    soup = bs.BeautifulSoup(result, 'html.parser')
                     tablerows = soup.findAll('tr')
                     hacks = []
                     for i in range(1, len(tablerows)):
-                        hacks.append(str(tablerows[i]))
+                        hacks.append(str(tablerows[i]))  
                 except:
                     print('Could not get information from page:', page)
                 # LOOP THRU HACKS AND EXTRACT INFORMATION AND INSERT TO DATABASE
@@ -1344,9 +1339,9 @@ class WThreadUpdateDatabase(QtCore.QThread):
                         romDemo = str(tds[1].text).strip()
                         # [2] FEATURED
                         romFeatured = str(tds[2].text).strip()
-                        # [3] LENGTH
+                        # [3] LENGTH                        
                         romLength = str(tds[3].text).strip()[:-8]
-                        # [4] TYPE
+                        # [4] TYPE                        
                         romType = str(tds[4].text).strip()
                         # [5] AUTHORS
                         romAuthors = str(tds[5].text).strip()
@@ -1355,10 +1350,10 @@ class WThreadUpdateDatabase(QtCore.QThread):
                         # [7] SIZE
                         romSize = str(tds[7].text).strip()
                         # [8] DOWNLOADLINK, DOWNLOADS
-                        romDl = 'https:'+str(tds[8]).split('<a href="')[
+                        romDl = str(tds[8]).split('<a href="')[
                             1].split('">Download</a>')[0].strip()
-                        romDownloads = str(tds[8]).split('class="small">')[
-                            1].split(' downlo')[0].strip().replace(',', '')
+                        romDownloads = str(tds[8]).split('class="secondary-info">')[
+                            1].split(' downlo')[0].strip().replace(',', '')                        
                         data = {
                             'name': romName,
                             'gameid': romId,
@@ -1374,7 +1369,7 @@ class WThreadUpdateDatabase(QtCore.QThread):
                             'link': romDl,
                             'approved': 1
                         }
-                        # print(data)
+                        print(data['link'])
                         # INSERT IN TO DATABASE
                         self.dbSendUpdate(data)
                 except:
@@ -1766,7 +1761,7 @@ class WThreadDownloadAndPatchRom(QtCore.QThread):
                     fd.write(chunk)
             return True
         except:
-            print('Error. Could not downloade file:', url)
+            print('Error. Could not download file:', url)
             return False
 
     def patchRomFile(self, sourcefile, patchfile, targetfile):
@@ -1841,8 +1836,7 @@ class WThreadGetMoreInfo(QtCore.QThread):
             # GRAB DESCRIPTION
         try:
             resultDesc = source.split('Description:')[1].split('</tr>')[0]
-            result = resultDesc.split('cell2">')[1].split(
-                '</td>')[0].replace('<br>', '').strip()
+            result = resultDesc.split('<td>')[1].split('</td>')[0].replace('<br>', '').strip()
             update = {
                 'id': self.romId,
                 'description': result
@@ -1854,9 +1848,9 @@ class WThreadGetMoreInfo(QtCore.QThread):
         # GRAB ALL IMAGES
         try:
             resultImagesText = source.split(
-                '"screenshotListContainer", [')[1].split(']);')[0]
+                '"slideshow", images: [')[1].split(']}];')[0]
             imgLinks = []
-            pattern = re.compile("\/\/(.*)'")
+            pattern = re.compile("\/\/(.*?)'")
             for img in re.findall(pattern, resultImagesText):
                 imgName = img.split(
                     'dl.smwcentral.net/image/')[1].split('.png')[0]
